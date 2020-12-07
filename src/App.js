@@ -1,7 +1,13 @@
 import React from 'react';
 import './App.css';
 import jsonLogic from 'json-logic-js';
+import Modal from 'react-bootstrap/Modal'
+import ModalHeader from 'react-bootstrap/ModalHeader';
+import ModalTitle from 'react-bootstrap/ModalTitle';
+import ModalBody from 'react-bootstrap/ModalBody'
+import ModalFooter from 'react-bootstrap/ModalFooter'
 import Header from './components/Header/Header';
+import Button from 'react-bootstrap/Button';
 import Footer from './components/Footer/Footer';
 import CaseOne from './components/CaseOne/CaseOne';
 import CaseTwo from './components/CaseTwo/CaseTwo';
@@ -21,7 +27,9 @@ class App extends React.Component {
       output: '',
       logic: JSON.stringify(logic),
       data: JSON.stringify(data),
-      caseActive:'caseOne'
+      caseActive:'caseOne',
+      show:false,
+      output:''
     };
   }
 
@@ -29,8 +37,22 @@ class App extends React.Component {
     this.setState({
       caseActive:e
     })
-
   }
+
+  handleClose = ()=>{
+    this.setState({
+      show:false,
+      output:''
+    })
+  } 
+
+  handleShow = (e)=>{
+    this.setState({
+      show:true,
+      output:e
+    })
+  } 
+
   submitForm = (e) => {
     e.preventDefault();
     console.log(jsonLogic.apply(
@@ -39,6 +61,7 @@ class App extends React.Component {
     ));
     let logic = e.target.logic.value;
     let data = e.target.data.value;
+    console.log(data)
     let outputVal = jsonLogic.apply(JSON.parse(logic), JSON.parse(data));
 
     console.log(outputVal);
@@ -87,13 +110,32 @@ class App extends React.Component {
                   </ul>                
               </div>
           </div>
-          {this.state.caseActive === 'caseOne' && <CaseOne/> }
-          {this.state.caseActive === 'caseTwo' && <CaseTwo/> }
-          {this.state.caseActive === 'caseThree' && <CaseThree/>}
+          {this.state.caseActive === 'caseOne' && <CaseOne handleOutput = {(e)=>this.handleShow(e)}/> }
+          {this.state.caseActive === 'caseTwo' && <CaseTwo handleOutput = {(e)=>this.handleShow(e)}/> }
+          {this.state.caseActive === 'caseThree' && <CaseThree handleOutput = {(e)=>this.handleShow(e)}/>}
       </div>
         </React.Fragment>
       </main>
       <Footer/>
+
+
+
+
+
+      <Modal show={this.state.show} onHide={this.handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, the output is {this.state.output}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={this.handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
     );
   }
