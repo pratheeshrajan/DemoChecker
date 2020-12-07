@@ -1,0 +1,7 @@
+.navbar.bg-dark {
+    background: #20b0a3 !important;
+    box-shadow: 0px 1px 10px #999;
+} 
+.navbar.bg-dark .nav-link{
+    color: #fff !important;
+}
