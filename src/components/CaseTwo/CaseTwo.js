@@ -51,7 +51,7 @@ class CaseTwo extends React.Component {
         let outputVal = jsonLogic.apply(this.obj, JSON.parse(stringValue));
         console.log(outputVal);
         if(outputVal) {
-            this.props.handleOutput("You have covid symptoms!");
+            this.props.handleOutput("You have severe covid symptoms!");
 
         } else{
             this.props.handleOutput("You have no covid symptoms!");
