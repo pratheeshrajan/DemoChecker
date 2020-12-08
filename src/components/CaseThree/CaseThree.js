@@ -32,7 +32,7 @@ class CaseThree extends React.Component {
                                 <input type="text" name="inputValue" value={this.state.inputValue} onChange={this.handleInputChange}   class="form-control" placeholder="Enter Input"/>
                                 </div>
                                 <div class="col-4">
-                                <button type="submit" class="btn btn-primary w-100" onClick={this.handleSubmit}>Submit</button>
+                                <button disabled={!this.state.inputValue} type="submit" class="btn btn-primary w-100" onClick={this.handleSubmit}>Submit</button>
                                 </div>
                             </div>
                         </div>

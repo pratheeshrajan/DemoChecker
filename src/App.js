@@ -15,49 +15,51 @@ import CaseThree from './components/CaseThree/CaseThree';
 
 class App extends React.Component {
   constructor() {
-    var logic = {"if" : [
-      {"<": [{"var":"temperature"}, 99] }, "No covid symptoms",
-      {">=": [{"var":"temperature"}, 99] }, "Covid symptoms"
-    ]};
+    var logic = {
+      "if": [
+        { "<": [{ "var": "temperature" }, 99] }, "No covid symptoms",
+        { ">=": [{ "var": "temperature" }, 99] }, "Covid symptoms"
+      ]
+    };
 
-    var data = {"temperature":55}
+    var data = { "temperature": 55 }
 
     super();
     this.state = {
       output: '',
       logic: JSON.stringify(logic),
       data: JSON.stringify(data),
-      caseActive:'caseOne',
-      show:false,
-      output:''
+      caseActive: 'caseOne',
+      show: false,
+      output: ''
     };
   }
 
-  handleCase = (e)=>{
+  handleCase = (e) => {
     this.setState({
-      caseActive:e
+      caseActive: e
     })
   }
 
-  handleClose = ()=>{
+  handleClose = () => {
     this.setState({
-      show:false,
-      output:''
+      show: false,
+      output: ''
     })
-  } 
+  }
 
-  handleShow = (e)=>{
+  handleShow = (e) => {
     this.setState({
-      show:true,
-      output:e
+      show: true,
+      output: e
     })
-  } 
+  }
 
   submitForm = (e) => {
     e.preventDefault();
     console.log(jsonLogic.apply(
-      {"var" : 1 },
-      [ "apple", "banana", "carrot" ]
+      { "var": 1 },
+      ["apple", "banana", "carrot"]
     ));
     let logic = e.target.logic.value;
     let data = e.target.data.value;
@@ -66,16 +68,16 @@ class App extends React.Component {
 
     console.log(outputVal);
 
-    if(outputVal) {
-    this.setState({output: outputVal.toString()})
+    if (outputVal) {
+      this.setState({ output: outputVal.toString() })
     }
     // this.setState((prevState) => ({ output: [...prevState.output, output] }));
   };
   render() {
     return (
-    <div className="app">
-      <Header/>
-          {/* <form onSubmit={(e) => this.submitForm(e)}>
+      <div className="app">
+        <Header />
+        {/* <form onSubmit={(e) => this.submitForm(e)}>
             <label>Logic:</label><br/>
             <textarea rows="7" cols="130" name="logic" defaultValue={this.state.logic}></textarea>
             <br/>
@@ -86,57 +88,57 @@ class App extends React.Component {
           </form>
           <label>Output:</label>
       <div id="output">{this.state.output}</div> */}
-      <main>
-        <React.Fragment>
-        <div className="container">        
-          <div className="media-container-row">
-              <div className="col-12 col-md-8">
+        <main>
+          <React.Fragment>
+            <div className="container">
+              <div className="media-container-row">
+                <div className="col-12 col-md-8">
                   <ul className="nav nav-tabs border-0 border-radius-0" role="tablist">
-                      <li className="nav-item">
-                      <a className={`nav-link ${this.state.caseActive === 'caseOne'?'active':''}`} onClick={() => this.handleCase('caseOne')}>
-                          Case 1
+                    <li className="nav-item">
+                      <a className={`nav-link ${this.state.caseActive === 'caseOne' ? 'active' : ''}`} onClick={() => this.handleCase('caseOne')}>
+                        Case 1
                           </a>
-                      </li>
-                      <li className="nav-item">
-                      <a className={`nav-link ${this.state.caseActive === 'caseTwo'?'active':''}`} onClick={() => this.handleCase('caseTwo')}>
-                          Case 2
+                    </li>
+                    <li className="nav-item">
+                      <a className={`nav-link ${this.state.caseActive === 'caseTwo' ? 'active' : ''}`} onClick={() => this.handleCase('caseTwo')}>
+                        Case 2
                           </a>
-                      </li>
-                      <li className="nav-item">
-                      <a className={`nav-link ${this.state.caseActive === 'caseThree'?'active':''}`} onClick={() => this.handleCase('caseThree')}>
-                          Case 3
+                    </li>
+                    <li className="nav-item">
+                      <a className={`nav-link ${this.state.caseActive === 'caseThree' ? 'active' : ''}`} onClick={() => this.handleCase('caseThree')}>
+                        Case 3
                           </a>
-                      </li>
-                  </ul>                
+                    </li>
+                  </ul>
+                </div>
               </div>
-          </div>
-          {this.state.caseActive === 'caseOne' && <CaseOne handleOutput = {(e)=>this.handleShow(e)}/> }
-          {this.state.caseActive === 'caseTwo' && <CaseTwo handleOutput = {(e)=>this.handleShow(e)}/> }
-          {this.state.caseActive === 'caseThree' && <CaseThree handleOutput = {(e)=>this.handleShow(e)}/>}
+              {this.state.caseActive === 'caseOne' && <CaseOne handleOutput={(e) => this.handleShow(e)} />}
+              {this.state.caseActive === 'caseTwo' && <CaseTwo handleOutput={(e) => this.handleShow(e)} />}
+              {this.state.caseActive === 'caseThree' && <CaseThree handleOutput={(e) => this.handleShow(e)} />}
+            </div>
+          </React.Fragment>
+        </main>
+        <Footer />
+
+
+
+
+
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Output</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{this.state.output}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={this.handleClose}>
+              Close
+          </Button>
+            {/* <Button variant="primary" onClick={this.handleClose}>
+              Save Changes
+          </Button> */}
+          </Modal.Footer>
+        </Modal>
       </div>
-        </React.Fragment>
-      </main>
-      <Footer/>
-
-
-
-
-
-      <Modal show={this.state.show} onHide={this.handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, the output is {this.state.output}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={this.handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={this.handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
     );
   }
 }
