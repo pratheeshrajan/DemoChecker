@@ -1,7 +1,6 @@
 import React from 'react';
 import jsonLogic from 'json-logic-js';
-
-
+import caseImage from '../../assets/images/d1.PNG'; // with import
 class CaseOne extends React.Component {
 
     state = {
@@ -67,8 +66,8 @@ class CaseOne extends React.Component {
     };
 
     render() {
-        return (
 
+        return (
             <div className="cases">
 
                 <div className="row">
@@ -76,21 +75,21 @@ class CaseOne extends React.Component {
                         <form onSubmit={(e) => this.submitForm(e)}>
 
                             <textarea id="myTextArea" name="username" cols="50" rows="10"></textarea>
-                            <div class="form-row">
-                                <div class="col-4">
-                                    <input type="text" name="input1" class="form-control" defaultValue="temperature" placeholder="Enter Parameter Name" />
+                            <div className="form-row">
+                                <div className="col-4">
+                                    <input type="text" name="input1" className="form-control" defaultValue="temperature" placeholder="Enter Parameter Name" />
                                 </div>
-                                <div class="col-4">
-                                    <input type="text" name="input2" class="form-control" defaultValue="100" placeholder="Enter Value" />
+                                <div className="col-4">
+                                    <input type="text" name="input2" className="form-control" defaultValue="100" placeholder="Enter Value" />
                                 </div>
-                                <div class="col-4">
-                                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                                <div className="col-4">
+                                    <button type="submit" className="btn btn-primary w-100">Submit</button>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <div className="col">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/LampFlowchart.svg/1200px-LampFlowchart.svg.png" />
+                    <div className="col border-grey">
+                        <img src={caseImage} />
                     </div>
                 </div>
             </div>

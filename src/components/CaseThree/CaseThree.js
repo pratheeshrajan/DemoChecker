@@ -52,15 +52,15 @@ class CaseThree extends React.Component {
                         <form onSubmit={(e) => this.submitForm(e)}>
 
                             <textarea id="myTextArea" name="username" cols="50" rows="10"></textarea>
-                            <div class="form-row">
-                                <div class="col-4">
-                                    <input type="text" name="input1" class="form-control" defaultValue="critical" placeholder="Critically ill?" />
+                            <div className="form-row">
+                                <div className="col-4">
+                                    <input type="text" name="input1" className="form-control" defaultValue="critical" placeholder="Critically ill?" />
                                 </div>
-                                <div class="col-4">
-                                    <input type="text" name="input2" class="form-control" defaultValue="yes" placeholder="Enter Value" />
+                                <div className="col-4">
+                                    <input type="text" name="input2" className="form-control" defaultValue="yes" placeholder="Enter Value" />
                                 </div>
-                                <div class="col-4">
-                                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                                <div className="col-4">
+                                    <button type="submit" className="btn btn-primary w-100">Submit</button>
                                 </div>
                             </div>
                         </form>
